@@ -17,11 +17,12 @@ Então vamos lá!
 
 ## Desafio ##
 
+Neste repositório está o arquivo com a série histórica de cotações da bolsa de valores para o mês de janeiro de 2021, juntamento com a documentação de como interpretar o arquivo. 
+Crie uma aplicação web onde um usuário possa digitar o código de negociação de um ativo e um data e seja informado o preço de fechamendo do ativo naquela data específica.
+A aplicação tem apenas uma página e não necessita de controle de acesso.
 
-
-### Quais são as funcionalidade necessárias? ###
-
-
+Por exemplo:
+Quando o usuário informar o código PETR3 com a data 19/01/2021, deve ser retornado o valor R$ 28,91.
 
 ### Constraints ###
 
@@ -35,7 +36,7 @@ Então vamos lá!
 
 * O código será avaliado seguindo os seguintes critérios: estrutura, clareza e limpeza de código; resultado funcional; entre outros fatores.
 * O histórico de commits também pode ser avaliado.
-* A interface é importante e o design será avaliado, contudo o frontend não precisa ser impecável. Funcionalidade antes de beleza. Iremos avaliar principalmente os conhecimentos utilizados na construção do frontend.
+* O frontend não precisa ser impecável. Funcionalidade antes de beleza. Iremos avaliar principalmente os conhecimentos utilizados na construção do frontend.
 * Caso ache interessante, explique melhorias que poderiam ser feitas. Isso pode ser feito em um arquivo dentro do repositório ou no email de resposta que nos enviar.
 
 ## Diferenciais ##
