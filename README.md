@@ -12,6 +12,7 @@ Parabéns, você passou para o teste técnico do processo seletivo do Clube do V
 * Quando achar necessário/útil, explique as decisões técnicas tomadas, as escolhas por bibliotecas e ferramentas, o uso de patterns etc. Você pode fazer isso em comentários no código, dentro de um arquivo do repositório, um screencast explicativo ou todas as alternativas anteriores.
 * Soluções parciais serão aceitas. Caso algum ponto não esteja 100% em conformidade adicione um comentário no email ou README.md do repositório para nossa avaliação.
 * A entrega deve seguir o prazo orientado pelo recrutador no e-mail
+* Sinta-se a vontade para adicionar funcionalidades ao desafio se quiser
 
 Então vamos lá!
 
@@ -23,12 +24,20 @@ Utilize esses arquivos como fonte de dados para a sua aplicação ou seu banco d
 _Essas informações foram retiradas do seguinte link: http://www.b3.com.br/pt_br/market-data-e-indices/servicos-de-dados/market-data/historico/mercado-a-vista/cotacoes-historicas/_
 
 O seu objetivo hoje é: 
-Criar uma aplicação web onde um usuário possa digitar o código de negociação de um ativo e uma data e ver em tela o preço de fechamendo do ativo naquela data específica.
+Criar uma aplicação web onde um usuário possa fornecer os seguintes dados:
+
+* Código de negociação de um papel
+* Data do pregão
+
+E então ver em tela:
+
+* Preço do último negócio do papel naquele dia.
 
 A aplicação tem apenas uma página e não necessita de controle de acesso. 
 
-Por exemplo:
-Utilizando os dados anexados no repositório, quando o usuário informar o código PETR3 com a data 19/01/2021, deve ser retornado o valor R$ 28,91.
+### Exemplo ###
+
+Utilizando os dados anexados no repositório, quando o usuário informar o código PETR3 com a data 19/01/2021, deve ser retornado o valor R$ 29,12.
 
 ### Dicas e Constraints ###
 
@@ -44,9 +53,9 @@ Utilizando os dados anexados no repositório, quando o usuário informar o códi
 * O frontend não precisa ser impecável. Funcionalidade antes de beleza. Iremos avaliar principalmente os conhecimentos utilizados na construção do frontend.
 * Caso ache interessante, explique melhorias que poderiam ser feitas. Isso pode ser feito em um arquivo dentro do repositório ou no email de resposta que nos enviar.
 
-## Diferenciais ##
+## Mostre o seu diferencial para a gente! ##
 
-Mostre o seu diferencial para a gente!
+Estes pontos são opcionais, mas podem diferenciar você dos outros candidatos.
 
 * Docker;
 * Análise de dados;
