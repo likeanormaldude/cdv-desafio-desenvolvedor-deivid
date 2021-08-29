@@ -3,8 +3,8 @@ const express = require("express");
 const app = express();
 const stock = require("./stock");
 
-const host = process.env.HOST || "localhost";
-const port = process.env.PORT || "3000";
+const host = process.env.API_HOST || "localhost";
+const port = process.env.API_PORT || "4500";
 
 app.get("/fetch", async (req, res) => {
   const params = req.query;
@@ -12,6 +12,6 @@ app.get("/fetch", async (req, res) => {
   return res.json(result);
 });
 
-console.log(`Listening requests on http://${host}:${port}`);
+console.log(`API - Listening requests on http://${host}:${port}`);
 
 app.listen(port);

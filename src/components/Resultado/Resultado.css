@@ -1,0 +1,33 @@
+.resultado {
+  margin-left: 80px;
+  padding-left: 22px;
+}
+
+.resultado__tituloResultado {
+  font-weight: 700;
+}
+
+.resultado__precoUltPapel {
+  margin-top: 10px;
+  color: #368235;
+  font-weight: 600;
+  font-size: 19px;
+}
+
+.resultado__label {
+  display: block;
+  margin-bottom: 13px;
+}
+
+.resultado__row {
+  margin-top: 12px;
+}
+
+.btn-resultado {
+  padding: 6px;
+  min-width: 80px;
+}
+
+.btn-reset {
+  margin-left: 18px;
+}
