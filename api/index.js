@@ -12,6 +12,6 @@ app.get("/fetch", async (req, res) => {
   return res.json(result);
 });
 
-console.log(`API - Listening requests on http://${host}:${port}`);
+console.log(`API ready! Listening requests on http://${host}:${port}`);
 
 app.listen(port);

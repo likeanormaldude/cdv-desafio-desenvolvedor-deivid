@@ -1,13 +1,26 @@
 import React, { useState } from "react";
 import "./Form.css";
+import { useDataLayerValue } from "../../DataLayer";
+import axios from "../../axios";
 
 function Form() {
   const [codPreg, setCodPreg] = useState("");
   const [dataPreg, setDataPreg] = useState("");
+  const [{}, dispatch] = useDataLayerValue();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log(codPreg, "\n", dataPreg);
+    //console.log(codPreg, "\n", dataPreg);
+
+    axios
+      .get("/fetch")
+      .then((rs) => rs.json())
+      .then((data) => {
+        dispatch({
+          action: "SET_DATA",
+          data,
+        });
+      });
   };
 
   const resetForm = () => {

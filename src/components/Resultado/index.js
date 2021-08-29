@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./Resultado.css";
+import { useDataLayerValue } from "../../DataLayer";
 
 function Resultado() {
   const [codPreg, setCodPreg] = useState("");
   const [dataPreg, setDataPreg] = useState("");
+  const [{ data }] = useDataLayerValue();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -24,16 +26,18 @@ function Resultado() {
   };
 
   return (
-    <div className="resultado">
-      <h2 className="resultado__tituloResultado">Resultados</h2>
+    Object.keys(data) > 0 && (
+      <div className="resultado">
+        <h2 className="resultado__tituloResultado">Resultados</h2>
 
-      <div className="resultado__row">
-        <span className="resultado__label">
-          Preço do último negócio do papel-mercado no pregão
-        </span>
-        <span className="resultado__precoUltPapel">R$ 29,12</span>
+        <div className="resultado__row">
+          <span className="resultado__label">
+            Preço do último negócio do papel-mercado no pregão
+          </span>
+          <span className="resultado__precoUltPapel">R$ 29,12</span>
+        </div>
       </div>
-    </div>
+    )
   );
 }
 

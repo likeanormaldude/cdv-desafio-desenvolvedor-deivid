@@ -5,10 +5,11 @@ const path = require("path").basename(__dirname);
 // const localDB = fs.readFileSync("./COTAHIST_M012021.TXT").toString();
 console.log(__filename);
 const localDB = fs.readFileSync(`${path}/mock-db.txt`).toString();
+// const localDB = fs.readFileSync(`./mock-db.txt`).toString();
 
 class Stock {
-  async getStock(options) {
-    const params = querystring.stringify(options);
+  async getStock(params) {
+    querystring.parse(params);
     const codPapel = params.codPapel;
     const _dateBr = params.dataPreg;
     const cached = await cache.get(codPapel);
@@ -41,7 +42,7 @@ class Stock {
     let response = {};
     let lineObject;
 
-    if (_lines.length < 0) {
+    if (_lines.length > 0) {
       _lines.forEach((matchObj, index) => {
         // codPapel position 13 of the line
         startingPoint = matchObj.index - 12; // Line beginning
@@ -58,7 +59,7 @@ class Stock {
         }
 
         // According to layout file to read the records.
-        precoUltPregao = line.substr(109, 121);
+        precoUltPregao = line.substr(109, 12);
 
         lineObject = {
           lineMatch: line,
