@@ -8,7 +8,9 @@ const reducer = (state, action) => {
     case "SET_DATA":
       return {
         ...state,
-        data: action.data,
+        data: {
+          precoUltPregao: action.data.precoUltPregao,
+        },
       };
 
     default:

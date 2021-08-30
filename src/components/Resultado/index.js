@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Resultado.css";
 import { useDataLayerValue } from "../../DataLayer";
 
 function Resultado() {
   const [codPreg, setCodPreg] = useState("");
   const [dataPreg, setDataPreg] = useState("");
-  const [{ data }] = useDataLayerValue();
+  let bla = useDataLayerValue();
+  const [{ data }, dispatch] = useDataLayerValue();
+
+  useEffect(() => {
+    var blabla = data.precoUltPregao;
+    var debug2 = 1;
+  }, [data]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -26,7 +32,7 @@ function Resultado() {
   };
 
   return (
-    Object.keys(data) > 0 && (
+    Object.keys(data).length > 0 && (
       <div className="resultado">
         <h2 className="resultado__tituloResultado">Resultados</h2>
 

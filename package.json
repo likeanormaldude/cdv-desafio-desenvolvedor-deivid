@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "concurrently": "^6.2.1",
+    "cors": "^2.8.5",
+    "http-proxy-middleware": "^2.0.1",
     "ioredis": "^4.27.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -17,12 +19,14 @@
   },
   "scripts": {
     "start": "npm run app",
-    "app": "concurrently --kill-others \"npm run start-react-app\" \"npm run start-api\"",
+    "app": "concurrently --kill-others \"npm run start-react-app\" \"npm run start-api-nodemon\"",
     "start-react-app": "react-scripts start",
     "start-api": "node api/index",
+    "start-api-nodemon": "nodemon api/index",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "nodemon api/index"
   },
   "eslintConfig": {
     "extends": [

@@ -101,9 +101,10 @@ class Stock {
         return false;
       });
     }
+    var keys = Object.keys(response);
 
     // Return the proper response.
-    return Object.keys(response > 0) ? this.getPrecoPregao(response) : null;
+    return keys.length > 0 ? this.getPrecoPregao(response) : null;
   }
 }
 

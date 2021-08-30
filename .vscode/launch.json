@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Attach to Chrome",
+      "type": "node",
+      "protocol": "inspector",
+      "restart": true,
+      "request": "attach"
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Launch program",

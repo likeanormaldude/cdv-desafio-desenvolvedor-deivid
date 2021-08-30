@@ -4,37 +4,40 @@ import { useDataLayerValue } from "../../DataLayer";
 import axios from "../../axios";
 
 function Form() {
-  const [codPreg, setCodPreg] = useState("");
+  const [codPapel, setCodPapel] = useState("");
   const [dataPreg, setDataPreg] = useState("");
   const [{}, dispatch] = useDataLayerValue();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    //console.log(codPreg, "\n", dataPreg);
+    //console.log(codPapel, "\n", dataPreg);
 
     axios
       .get("/fetch", {
         params: {
-          codPreg,
+          codPapel,
           dataPreg,
         },
+        headers: { "Access-Control-Allow-Origin": "*" },
       })
-      .then((rs) => rs.json())
-      .then((data) => {
+      .then((rs) => {
+        var debug = 1;
         dispatch({
-          action: "SET_DATA",
-          data,
+          type: "SET_DATA",
+          data: {
+            precoUltPregao: rs.data.precoUltPregao,
+          },
         });
       });
   };
 
   const resetForm = () => {
-    setCodPreg("");
+    setCodPapel("");
     setDataPreg("");
   };
 
   const changePreg = (evt) => {
-    setCodPreg(evt.target.value);
+    setCodPapel(evt.target.value);
   };
 
   const changeDataPreg = (evt) => {
@@ -53,7 +56,7 @@ function Form() {
           name="codPapel"
           id="codPapel"
           onChange={changePreg}
-          value={codPreg}
+          value={codPapel}
         />
       </div>
 
