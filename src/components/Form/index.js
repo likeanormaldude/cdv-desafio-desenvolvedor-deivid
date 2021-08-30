@@ -13,7 +13,12 @@ function Form() {
     //console.log(codPreg, "\n", dataPreg);
 
     axios
-      .get("/fetch")
+      .get("/fetch", {
+        params: {
+          codPreg,
+          dataPreg,
+        },
+      })
       .then((rs) => rs.json())
       .then((data) => {
         dispatch({

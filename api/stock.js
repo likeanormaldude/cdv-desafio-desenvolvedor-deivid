@@ -7,16 +7,49 @@ console.log(__filename);
 const localDB = fs.readFileSync(`${path}/mock-db.txt`).toString();
 // const localDB = fs.readFileSync(`./mock-db.txt`).toString();
 
+const insertStr = function (str, index, insertion) {
+  if (index > 0) {
+    return str.substring(0, index) + insertion + str.substr(index);
+  }
+
+  return insertion + str;
+};
+
 class Stock {
+  getPrecoPregao(obj) {
+    const str = obj.precoUltPregao;
+    const ind = str.length - 2;
+    const formatted = insertStr(str, ind, ".");
+    var f = parseFloat(formatted);
+    // var atual = parseFloat("29.12");
+
+    //com R$
+    var precoPregao = f.toLocaleString("pt-br", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+    //sem R$
+    // var f2 = atual.toLocaleString("pt-br", { minimumFractionDigits: 2 });
+
+    return precoPregao;
+  }
+
   async getStock(params) {
     querystring.parse(params);
     const codPapel = params.codPapel;
+
+    // dateBr   : 15/04/2020
+    // desired  : 20200415
     const _dateBr = params.dataPreg;
-    const cached = await cache.get(codPapel);
+    const partsDate = _dateBr.split("/");
+
+    let _date = partsDate[2] + partsDate[1] + partsDate[0];
+    const cached = await cache.get(`${codPapel}-${_date}}`);
 
     // If it does exist, then return the cached data.
     if (cached) {
-      return cached;
+      return this.getPrecoPregao(cached);
     }
 
     // Otherwise, fetch the data
@@ -24,12 +57,6 @@ class Stock {
 
     // If no matches
     if (found === -1) return null;
-
-    // dateBr   : 15/04/2020
-    // desired  : 20200415
-    let _date;
-    const partsDate = _dateBr.split("/");
-    _date = partsDate[2] + partsDate[1] + partsDate[0];
 
     // /PETR3/g
     const ptt = new RegExp(codPapel, "g");
@@ -67,7 +94,7 @@ class Stock {
         };
 
         // Store in cache
-        cache.set(codPapel, lineObject, 60 * 15);
+        cache.set(`${codPapel}-${_date}}`, lineObject, 60 * 15);
         response = lineObject;
 
         // Inferred that is a unique line in the local database with the given params
@@ -76,7 +103,7 @@ class Stock {
     }
 
     // Return the proper response.
-    return Object.keys(response > 0) ? response : null;
+    return Object.keys(response > 0) ? this.getPrecoPregao(response) : null;
   }
 }
 
