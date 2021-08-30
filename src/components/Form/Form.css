@@ -1,0 +1,25 @@
+.form {
+  padding-left: 22px;
+}
+
+.form__tituloForm {
+  font-weight: 700;
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.form__row {
+  margin-top: 12px;
+}
+
+.btn-form {
+  padding: 6px;
+  min-width: 80px;
+}
+
+.btn-reset {
+  margin-left: 18px;
+}

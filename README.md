@@ -1,68 +1,44 @@
-# Desafio Desenvolvedor CDV #
+# CDV Test Deivid Rodrigues
 
-Parabéns, você passou para o teste técnico do processo seletivo do Clube do Valor.
+![GitHub all releases](https://img.shields.io/github/downloads/likeanormaldude/cdv-desafio-desenvolvedor-deivid/total?color=%2300f&label=Downloads&logo=GitHub) ![GitHub repo size](https://img.shields.io/github/repo-size/likeanormaldude/cdv-desafio-desenvolvedor-deivid?color=%23657b99)
 
-## Instruções ##
+[![Linkedin Profile](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/rodriguesdeivid15)
 
-* Faça o Fork desse repositório e responda o desafio em um projeto com o seguinte nome: cdv-desafio-desenvolvedor-nome-sobrenome;
-* Assim que concluir o seu desafio, publique o mesmo em sua conta do bitbucket ou github e mande o link do projeto para o recrutador, informando que finalizou.
-* Não se esqueça de deixar o projeto como público para que possamos avaliá-lo
-* Não esqueça de documentar o processo necessário para rodar a aplicação.
-* Você pode utilizar a linguagem, componentes e frameworks que ficarem mais confortáveis para você.
-* Quando achar necessário/útil, explique as decisões técnicas tomadas, as escolhas por bibliotecas e ferramentas, o uso de patterns etc. Você pode fazer isso em comentários no código, dentro de um arquivo do repositório, um screencast explicativo ou todas as alternativas anteriores.
-* Soluções parciais serão aceitas. Caso algum ponto não esteja 100% em conformidade adicione um comentário no email ou README.md do repositório para nossa avaliação.
-* A entrega deve seguir o prazo orientado pelo recrutador no e-mail
-* Sinta-se a vontade para adicionar funcionalidades ao desafio se quiser
+App built with ReactJS, having a local API (_./api_) to get the request and parse the local DB `./api/COTAHIST_M012021.TXT`
+With "Código de negociação do papel" and "Data do pregão", the API will search for the most update "Preço do Último negócio do papel-mercado" for the given date
 
-Então vamos lá!
+![alt text](https://i.imgur.com/jl1RjyN.png)
 
-## Desafio ##
+## Installation
 
-Neste repositório está o arquivo com a série histórica de cotações da bolsa de valores para o mês de janeiro de 2021, juntamente com a documentação de como interpretar o arquivo. 
-Utilize esses arquivos como fonte de dados para a sua aplicação ou seu banco de dados.
+```sh
+# First make sure you have redis-server running on your machine and its port is available.
+npm install
+npm run app
+```
 
-_Essas informações foram retiradas do seguinte link: http://www.b3.com.br/pt_br/market-data-e-indices/servicos-de-dados/market-data/historico/mercado-a-vista/cotacoes-historicas/_
+The script "app" on package json will run the following commands:
 
-O seu objetivo hoje é: 
-Criar uma aplicação web onde um usuário possa fornecer os seguintes dados:
+```sh
+# Concurrently is a package that allows us to run both the local API and the interface built with ReactJS
+concurrently --kill-others \"npm run start-react-app\" \"npm run start-api-nodemon\"
+```
 
-* Código de negociação de um papel
-* Data do pregão
+## API Test
 
-E então ver em tela:
+To individually teste the API there's the npm script **start-api**. The one and only route is `/fetch`.
+Request Example: http://localhost:4500/fetch?codPapel=PETR3&dataPreg=19%2F01%2F2021 .
+Note that both HOST and PORT can be set using `.env` file:
+![alt text](https://i.imgur.com/gjPKqiu.png)
+![alt text](https://i.imgur.com/hb07F22.png)
 
-* Preço do último negócio do papel naquele dia.
+## Clear Cache
 
-A aplicação tem apenas uma página e não necessita de controle de acesso. 
+```sh
+# Once redis-server is running, open another terminal and run:
+redis-cli FLUSHALL
+```
 
-### Exemplo ###
+## Project Main Comments
 
-Utilizando os dados anexados no repositório, quando o usuário informar o código PETR3 com a data 19/01/2021, deve ser retornado o valor R$ 29,12.
-
-### Dicas e Constraints ###
-
-* Considere que sua aplicação será um sucesso e um histórico muito maior de dados pode ser utilizado para alimentá-la.
-* Controle de erros é importante, pois sua aplicação será utilizada por clientes finais.
-* A interface não precisa ter um design impecável, mas mostre suas habilidades em front-end.
-* Chamadas de API são interessantes para fornecer dados extras que o front-end não mostra.
-
-## O que será avaliado ##
-
-* O código será avaliado seguindo os seguintes critérios: estrutura, clareza e limpeza de código; resultado funcional; entre outros fatores.
-* O histórico de commits também pode ser avaliado.
-* O frontend não precisa ser impecável. Funcionalidade antes de beleza. Iremos avaliar principalmente os conhecimentos utilizados na construção do frontend.
-* Caso ache interessante, explique melhorias que poderiam ser feitas. Isso pode ser feito em um arquivo dentro do repositório ou no email de resposta que nos enviar.
-
-## Mostre o seu diferencial para a gente! ##
-
-Estes pontos são opcionais, mas podem diferenciar você dos outros candidatos.
-
-* Docker;
-* Análise de dados;
-* Testes automatizados;
-* Documentação;
-* Utilização de boas práticas;
-* Design de frontend;
-
-
-Boa sorte!
+The comments about the creation process and other details can be found at `./src/App.js`

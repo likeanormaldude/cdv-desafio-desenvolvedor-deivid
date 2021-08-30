@@ -1,0 +1,10 @@
+.App {
+  background-image: url("img/bg-blockchain.png");
+  background-repeat: repeat;
+}
+
+.container {
+  display: flex;
+  /* border: 1px solid black; */
+  min-height: 100vh;
+}
