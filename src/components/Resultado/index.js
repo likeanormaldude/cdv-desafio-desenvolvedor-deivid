@@ -5,13 +5,7 @@ import { useDataLayerValue } from "../../DataLayer";
 function Resultado() {
   const [codPreg, setCodPreg] = useState("");
   const [dataPreg, setDataPreg] = useState("");
-  let bla = useDataLayerValue();
   const [{ data }, dispatch] = useDataLayerValue();
-
-  useEffect(() => {
-    var blabla = data.precoUltPregao;
-    var debug2 = 1;
-  }, [data]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -40,7 +34,9 @@ function Resultado() {
           <span className="resultado__label">
             Preço do último negócio do papel-mercado no pregão
           </span>
-          <span className="resultado__precoUltPapel">R$ 29,12</span>
+          <span className="resultado__precoUltPapel">
+            {data.precoUltPregao}
+          </span>
         </div>
       </div>
     )

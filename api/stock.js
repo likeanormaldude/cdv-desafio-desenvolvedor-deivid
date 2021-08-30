@@ -4,7 +4,8 @@ const fs = require("fs");
 const path = require("path").basename(__dirname);
 // const localDB = fs.readFileSync("./COTAHIST_M012021.TXT").toString();
 console.log(__filename);
-const localDB = fs.readFileSync(`${path}/mock-db.txt`).toString();
+// const localDB = fs.readFileSync(`${path}/mock-db.txt`).toString();
+const localDB = fs.readFileSync(`${path}/COTAHIST_M012021.TXT`).toString();
 // const localDB = fs.readFileSync(`./mock-db.txt`).toString();
 
 const insertStr = function (str, index, insertion) {
@@ -68,6 +69,8 @@ class Stock {
     let precoUltPregao;
     let response = {};
     let lineObject;
+    let stackResults = [];
+    let remainingSpaces = 0;
 
     if (_lines.length > 0) {
       _lines.forEach((matchObj, index) => {
@@ -76,8 +79,12 @@ class Stock {
         endingPointLength = startingPoint + 233; // Line end (246)
         line = localDB.substr(startingPoint, endingPointLength);
 
-        // (20210119)(.+)?(PETR3)
-        var ptt = new RegExp(`(${_date})(.+)?(${codPapel})`, "g");
+        // (20210119)(.+)?(PETR3)(\s{7})
+        remainingSpaces = 12 - codPapel.length; // According to layout file
+        var ptt = new RegExp(
+          `(${_date})(.+)?(${codPapel})(\\s{${remainingSpaces}})`,
+          "g"
+        );
         var arr = Array.from(line.matchAll(ptt));
 
         // Not found. Go to next iteration
@@ -97,14 +104,16 @@ class Stock {
         cache.set(`${codPapel}-${_date}}`, lineObject, 60 * 15);
         response = lineObject;
 
-        // Inferred that is a unique line in the local database with the given params
-        return false;
+        stackResults.push(response);
       });
     }
+
     var keys = Object.keys(response);
 
+    var mostUpdatedResult = stackResults.pop();
+
     // Return the proper response.
-    return keys.length > 0 ? this.getPrecoPregao(response) : null;
+    return keys.length > 0 ? this.getPrecoPregao(mostUpdatedResult) : null;
   }
 }
 
