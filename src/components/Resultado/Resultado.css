@@ -1,10 +1,16 @@
 .resultado {
   margin-left: 80px;
   padding-left: 22px;
+  min-width: 400px;
+}
+
+.resultado * {
+  transition: all ease-in 0.4s;
 }
 
 .resultado__tituloResultado {
   font-weight: 700;
+  text-align: center;
 }
 
 .resultado__precoUltPapel {
@@ -30,4 +36,27 @@
 
 .btn-reset {
   margin-left: 18px;
+}
+
+.loader-gear {
+  width: 170px;
+  height: 147px;
+  margin-top: 4px;
+}
+
+.resultado__labelNoResults {
+  font-size: 20px;
+  font-weight: 400;
+  color: #444;
+}
+
+.containerLoader,
+.resultado_hasRecords {
+  display: flex;
+  justify-content: center;
+}
+
+.resultado_hasRecords {
+  flex-direction: column;
+  align-items: center;
 }

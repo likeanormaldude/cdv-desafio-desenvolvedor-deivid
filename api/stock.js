@@ -2,11 +2,7 @@ const querystring = require("querystring");
 const cache = require("./cache");
 const fs = require("fs");
 const path = require("path").basename(__dirname);
-// const localDB = fs.readFileSync("./COTAHIST_M012021.TXT").toString();
-console.log(__filename);
-// const localDB = fs.readFileSync(`${path}/mock-db.txt`).toString();
 const localDB = fs.readFileSync(`${path}/COTAHIST_M012021.TXT`).toString();
-// const localDB = fs.readFileSync(`./mock-db.txt`).toString();
 
 const insertStr = function (str, index, insertion) {
   if (index > 0) {
@@ -22,16 +18,12 @@ class Stock {
     const ind = str.length - 2;
     const formatted = insertStr(str, ind, ".");
     var f = parseFloat(formatted);
-    // var atual = parseFloat("29.12");
 
     //com R$
     var precoPregao = f.toLocaleString("pt-br", {
       style: "currency",
       currency: "BRL",
     });
-
-    //sem R$
-    // var f2 = atual.toLocaleString("pt-br", { minimumFractionDigits: 2 });
 
     return precoPregao;
   }
@@ -109,11 +101,12 @@ class Stock {
     }
 
     var keys = Object.keys(response);
+    var hasResults = keys.length > 0;
 
-    var mostUpdatedResult = stackResults.pop();
+    var mostUpdatedResult = hasResults ? stackResults.pop() : null;
 
     // Return the proper response.
-    return keys.length > 0 ? this.getPrecoPregao(mostUpdatedResult) : null;
+    return hasResults ? this.getPrecoPregao(mostUpdatedResult) : null;
   }
 }
 

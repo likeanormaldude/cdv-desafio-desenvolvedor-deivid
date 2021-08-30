@@ -4,14 +4,45 @@ import { useDataLayerValue } from "../../DataLayer";
 import axios from "../../axios";
 
 function Form() {
-  const [codPapel, setCodPapel] = useState("");
-  const [dataPreg, setDataPreg] = useState("");
+  const [codPapel, setCodPapel] = useState("PETR3");
+  const [dataPreg, setDataPreg] = useState("19/01/2021");
   const [{}, dispatch] = useDataLayerValue();
+
+  const toggleResultado = (vBool) => {
+    dispatch({
+      type: "SET_SEARCHED_DB",
+      searchedOnDB: vBool,
+    });
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    //console.log(codPapel, "\n", dataPreg);
 
+    if (codPapel == "" || dataPreg == "") {
+      alert("Preencha todos os campos do formulário");
+      toggleResultado(false);
+      return false;
+    }
+
+    const ptt = new RegExp("\\d{2}/\\d{2}/\\d{4}", "g");
+
+    if (!ptt.test(dataPreg)) {
+      // Havia tentado achar um plugin de máscara. Porém não encontrei um que fosse de rápida implementação.
+      alert("Insira uma data no formato dd/mm/YYYY");
+      toggleResultado(false);
+      return false;
+    }
+
+    // Run loader gif
+    dispatch({
+      type: "SET_LOADER",
+      loading: true,
+    });
+
+    // Set searched DB to render Resultado
+    toggleResultado(true);
+
+    //
     axios
       .get("/fetch", {
         params: {
@@ -21,12 +52,17 @@ function Form() {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then((rs) => {
-        var debug = 1;
         dispatch({
           type: "SET_DATA",
           data: {
             precoUltPregao: rs.data.precoUltPregao,
           },
+        });
+
+        // Results ready! Hide loader image.
+        dispatch({
+          type: "SET_LOADER",
+          loading: false,
         });
       });
   };

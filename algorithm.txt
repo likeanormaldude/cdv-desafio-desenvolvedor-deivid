@@ -1,0 +1,20 @@
+# Tenta encontrar o padrão (que vem do formulário)
+1 - str.indexOf ?
+
+# Caso positivo, avança para o resto do algoritmo
+2 - ptt.matchAll
+
+# Itera os registros e por fim defini a linha, conforme diretrizes do arquivo './Dados/SeriesHistoricas_Layout.pdf'
+3 - .forEach && get Line
+
+# Aplica a expressão regular para achar a linha que corresponde tanto ao código quanto à data pesquisada
+# Em '\s{7}', os espaços são dinamicamente calculados, baseado no código e o tamanho 12, conforme './Dados/SeriesHistoricas_Layout.pdf'
+4 - (20210119)(.+)?(PETR3)(\s{7})
+
+# - End of the algorithm
+5 - QueryOk ? return response
+
+
+
+
+
